@@ -3,13 +3,17 @@ filetype plugin on
 "Plugins
 call plug#begin('~/.local/share/nvim/site/mplugins')
 Plug 'scrooloose/nerdTree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
+Plug 'Shougo/deoplete.nvim', {'do':':UpdateRemotePlugins'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'sirver/ultisnips'
 call plug#end()
 
 set ignorecase
@@ -21,34 +25,15 @@ set backspace=indent,eol,start
 set autoindent
 set showcmd
 set ruler
+set tabstop=4
+
 vnoremap _g y:exe "grep /" . escape(@", '\\/') . "/ /.py *.js"<CR>
 filetype plugin indent on
 set rnu
 set nu
-"coc settings
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ stridx('])}"`', getline('.')[col('.')-1])!=-1 ? "\<Right>":
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"Plugin Config
+so ~/.config/nvim/plugin.config.vim
 
 " Mapeo de lider y shortcuts personales
 inoremap ii <Esc>
@@ -56,14 +41,47 @@ let mapleader = " "
 let gmapleader = " "
 nmap <leader>q : :q<cr>
 nmap <leader>s : :w!<cr>
-nmap <leader>z  <C-w>w
+nmap <leader>n : :bn<cr>
+nmap <leader>p : :bp<cr> 
 set mouse=a
 
-"NERDTree Keymaps
-nmap <leader>n :NERDTreeToggle<CR> 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-map <Leader> <Plug>(easymotion-prefix)
+"Skip closing character with tab
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : stridx('])}`"', getline('.')[col('.')-1]) != -1 ? "\<Right>":"\t"
 
-"Fuentes de Airline
-let g:airline_powerline_fonts = 1
-let g:airline_theme='luna'
+"Snippet to press f in visual mode to select the text and
+"do :%s/selected_text/cursor/gc
+
+vnoremap f y/\V<C-R>=escape(@",'/\')<CR><CR>
+vnoremap g y:%s/\<<C-R>=escape(@",'/\')<CR>\>/
+
+"Function to swap lines with Ctrl+J or Ctrl+K
+function! s:swap_lines(n1, n2)
+    let line1 = getline(a:n1)
+    let line2 = getline(a:n2)
+    call setline(a:n1, line2)
+    call setline(a:n2, line1)
+endfunction
+
+function! s:swap_up()
+    let n = line('.')
+    if n == 1
+        return
+    endif
+
+    call s:swap_lines(n, n - 1)
+    exec n - 1
+endfunction
+
+function! s:swap_down()
+    let n = line('.')
+    if n == line('$')
+        return
+    endif
+
+    call s:swap_lines(n, n + 1)
+    exec n + 1
+endfunction
+
+noremap <silent> <c-k> :call <SID>swap_up()<CR>
+noremap <silent> <c-j> :call <SID>swap_down()<CR>
+
