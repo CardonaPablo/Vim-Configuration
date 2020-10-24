@@ -39,14 +39,16 @@ so ~/.config/nvim/plugin.config.vim
 inoremap ii <Esc>
 let mapleader = " "
 let gmapleader = " "
-nmap <leader>q : :q<cr>
-nmap <leader>s : :w!<cr>
-nmap <leader>n : :bn<cr>
-nmap <leader>p : :bp<cr> 
+nmap <leader>q :q<cr>
+nmap <leader>s :w!<cr>
+nmap <leader>n :bn<cr>
+nmap <leader>p :bp<cr> 
+nmap <leader>d :bd<cr>
 set mouse=a
 
+
 "Skip closing character with tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : stridx('])}`"', getline('.')[col('.')-1]) != -1 ? "\<Right>":"\t"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : stridx(" ])}`\"", getline('.')[col('.')-1]) > 1 ? "\<Right>":"\t"
 
 "Snippet to press f in visual mode to select the text and
 "do :%s/selected_text/cursor/gc
