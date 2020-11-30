@@ -7,36 +7,37 @@ call plug#begin('~/.local/share/nvim/site/mplugins')
 Plug 'preservim/nerdTree'
 "Start screen
 Plug 'mhinz/vim-startify'
+"Surround with cs <target><replace>
 Plug 'tpope/vim-surround'
-Plug 'Shougo/deoplete.nvim', {'do':':UpdateRemotePlugins'}
+"Pretty status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Moving through file
 Plug 'easymotion/vim-easymotion'
+"Show diff in file
 Plug 'tpope/vim-fugitive'
+"Git icons for status line
 Plug 'airblade/vim-gitgutter'
+"Custom snippets
 Plug 'sirver/ultisnips'
 "Icons for NERDTree
 Plug 'ryanoasis/vim-devicons'
+"Git Icons for NERDTree
+Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
 set ignorecase
 set hidden
-set cmdheight=2
-set updatetime=300
+set noshowmode
 set shortmess+=c
 set backspace=indent,eol,start
 set autoindent
-set showcmd
-set ruler
 set tabstop=4
 set shiftwidth=4
 set expandtab
-
-vnoremap _g y:exe "grep /" . escape(@", '\\/') . "/ /.py *.js"<CR>
-filetype plugin indent on
-set rnu
 set nu
+
+filetype plugin indent on
 
 
 "Mapeo de lider y shortcuts personales
@@ -46,11 +47,15 @@ let gmapleader = " "
 nmap <leader>q :q<cr>
 nmap <leader>s :wa!<cr>
 nmap <leader>n :bn<cr>
-nmap <leader>p :bp<cr> 
+nmap <leader>p :bp<cr>
 nmap <leader>d :bd<cr>
 set mouse=a
 
-
+"Show trailing whitespace
+nmap tw /\s\+$<CR>
+"Disable highlight
+nmap H :noh<CR>
+ 
 "Skip closing character with tab
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : stridx(" ])}'`\"", getline('.')[col('.')-1]) > 1 ? "\<Right>":"\t"
 
