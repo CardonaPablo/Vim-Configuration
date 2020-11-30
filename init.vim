@@ -5,6 +5,8 @@ call plug#begin('~/.local/share/nvim/site/mplugins')
 
 "Navigation tree
 Plug 'preservim/nerdTree'
+"Start screen
+Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
 Plug 'Shougo/deoplete.nvim', {'do':':UpdateRemotePlugins'}
 Plug 'vim-airline/vim-airline'
