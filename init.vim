@@ -2,7 +2,9 @@ filetype plugin on
 
 "Plugins
 call plug#begin('~/.local/share/nvim/site/mplugins')
-Plug 'scrooloose/nerdTree'
+
+"Navigation tree
+Plug 'preservim/nerdTree'
 Plug 'tpope/vim-surround'
 Plug 'Shougo/deoplete.nvim', {'do':':UpdateRemotePlugins'}
 Plug 'vim-airline/vim-airline'
@@ -11,9 +13,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'benmills/vimux'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'sirver/ultisnips'
+"Icons for NERDTree
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 set ignorecase
@@ -26,21 +28,21 @@ set autoindent
 set showcmd
 set ruler
 set tabstop=4
+set shiftwidth=4
+set expandtab
 
 vnoremap _g y:exe "grep /" . escape(@", '\\/') . "/ /.py *.js"<CR>
 filetype plugin indent on
 set rnu
 set nu
 
-"Plugin Config
-so ~/.config/nvim/plugin.config.vim
 
-" Mapeo de lider y shortcuts personales
+"Mapeo de lider y shortcuts personales
 inoremap ii <Esc>
 let mapleader = " "
 let gmapleader = " "
 nmap <leader>q :q<cr>
-nmap <leader>s :w!<cr>
+nmap <leader>s :wa!<cr>
 nmap <leader>n :bn<cr>
 nmap <leader>p :bp<cr> 
 nmap <leader>d :bd<cr>
@@ -48,7 +50,7 @@ set mouse=a
 
 
 "Skip closing character with tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : stridx(" ])}`\"", getline('.')[col('.')-1]) > 1 ? "\<Right>":"\t"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : stridx(" ])}'`\"", getline('.')[col('.')-1]) > 1 ? "\<Right>":"\t"
 
 "Snippet to press f in visual mode to select the text and
 "do :%s/selected_text/cursor/gc
@@ -87,3 +89,5 @@ endfunction
 noremap <silent> <c-k> :call <SID>swap_up()<CR>
 noremap <silent> <c-j> :call <SID>swap_down()<CR>
 
+"Plugin Config
+so ~/.config/nvim/pluginconfig.vim
