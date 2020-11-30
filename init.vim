@@ -24,6 +24,8 @@ Plug 'sirver/ultisnips'
 Plug 'ryanoasis/vim-devicons'
 "Git Icons for NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
+"Multicursors
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 set ignorecase
