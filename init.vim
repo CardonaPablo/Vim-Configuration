@@ -34,8 +34,8 @@ set noshowmode
 set shortmess+=c
 set backspace=indent,eol,start
 set autoindent
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set nu
 
@@ -58,9 +58,8 @@ nmap tw /\s\+$<CR>
 "Disable highlight
 nmap H :noh<CR>
  
-"Skip closing character with tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : stridx(" ])}'`\"", getline('.')[col('.')-1]) > 1 ? "\<Right>":"\t"
-
+"Skip character with Shift-tab
+imap <S-Tab> <Right>
 "Snippet to press f in visual mode to select the text and
 "do :%s/selected_text/cursor/gc
 
