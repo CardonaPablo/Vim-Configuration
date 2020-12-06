@@ -1,4 +1,4 @@
-filetype plugin on
+filetype plugin indent on
 
 "Plugins
 call plug#begin('~/.local/share/nvim/site/mplugins')
@@ -14,9 +14,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Moving through file
 Plug 'easymotion/vim-easymotion'
-"Show diff in file
+"Git commands 
 Plug 'tpope/vim-fugitive'
-"Git icons for status line
+"Show diff in file
 Plug 'airblade/vim-gitgutter'
 "Custom snippets
 Plug 'sirver/ultisnips'
@@ -26,6 +26,15 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Multicursors
 Plug 'terryma/vim-multiple-cursors'
+"Finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+"Auto-close HTML tags"
+Plug 'alvan/vim-closetag'
+"Commenter <leader>c<space>
+Plug 'preservim/nerdcommenter'
+"Auto-pairs
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 set ignorecase
@@ -34,13 +43,10 @@ set noshowmode
 set shortmess+=c
 set backspace=indent,eol,start
 set autoindent
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 set nu
-
-filetype plugin indent on
-
 
 "Mapeo de lider y shortcuts personales
 inoremap ii <Esc>
