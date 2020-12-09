@@ -35,6 +35,8 @@ Plug 'alvan/vim-closetag'
 Plug 'preservim/nerdcommenter'
 "Auto-pairs
 Plug 'jiangmiao/auto-pairs'
+"Highlight CSS Colors
+Plug 'ap/vim-css-color'
 call plug#end()
 
 set ignorecase
