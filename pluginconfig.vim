@@ -15,6 +15,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeAutoDeleteBuffer=1
 let NERDTreeMinimalUI=1
 let NERDTreeShowLineNumbers=1
+let g:NERDTreeWinSize=40
 
 "UltiSnippets
 let g:UltiSnipsExpandTrigger='<C-Space>'
@@ -41,3 +42,7 @@ map <C-f> :Rg<CR>
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 let g:closetag_filetypes = 'html,xhtml,phtml'
 
+"Emmet
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key=','

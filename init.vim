@@ -37,6 +37,8 @@ Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 "Highlight CSS Colors
 Plug 'ap/vim-css-color'
+"Emmet
+Plug 'mattn/emmet-vim'
 call plug#end()
 
 set ignorecase
@@ -45,8 +47,8 @@ set noshowmode
 set shortmess+=c
 set backspace=indent,eol,start
 set autoindent
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set nu
 
@@ -59,19 +61,18 @@ nmap <leader>s :wa!<cr>
 nmap <leader>n :bn<cr>
 nmap <leader>p :bp<cr>
 nmap <leader>d :bd<cr>
+nmap nf :NERDTreeFind<cr>
 set mouse=a
 
 "Show trailing whitespace
 nmap tw /\s\+$<CR>
 "Disable highlight
 nmap H :noh<CR>
- 
+"Copy to system clipboard in visual mode
+vmap <C-x> "*y
 "Skip character with Shift-tab
 imap <S-Tab> <Right>
-"Snippet to press f in visual mode to select the text and
-"do :%s/selected_text/cursor/gc
 
-vnoremap f y/\V<C-R>=escape(@",'/\')<CR><CR>
 vnoremap g y:%s/\<<C-R>=escape(@",'/\')<CR>\>/
 
 "Function to swap lines with Ctrl+J or Ctrl+K
