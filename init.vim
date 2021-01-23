@@ -39,6 +39,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ap/vim-css-color'
 "Emmet
 Plug 'mattn/emmet-vim'
+"Coc Vim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 set ignorecase
